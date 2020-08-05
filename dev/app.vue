@@ -13,7 +13,7 @@
             </ul>
         </div>
         <div class="container" :class="wrapCls">
-          <router-view></router-view>
+            <router-view></router-view>
         </div>
     </div>
 </template>
@@ -21,51 +21,55 @@
 import routes from "./router/routes";
 
 export default {
-  name: "app",
-  computed: {
-    routeList() {
-      return routes;
+    name: "app",
+    computed: {
+        routeList() {
+            return routes;
+        },
+        wrapCls() {
+            return this.$route.path.indexOf("template") > -1
+                ? ""
+                : "page-component";
+        },
     },
-    wrapCls() {
-      return this.$route.path.indexOf("template") > -1 ? "" : "page-component";
-    }
-  },
-  mounted() {
-    // 设置左侧导航栏
-    document.querySelector(".menu > ul").style.height = document.querySelector(".menu").clientHeight + "px";
-    document.querySelector(".menu").style.overflow = "scroll";
-    document.querySelector(".menu").style.height = document.body.clientHeight + "px";
-  }
+    mounted() {
+        // 设置左侧导航栏
+        document.querySelector(".menu > ul").style.height =
+            document.querySelector(".menu").clientHeight + "px";
+        document.querySelector(".menu").style.overflow = "scroll";
+        document.querySelector(".menu").style.height =
+            document.body.clientHeight + "px";
+    },
 };
 </script>
 <style lang="scss" scoped>
 .app {
-  width: 100%;
-  height: 100%;
-
-  .menu {
-    width: 200px;
-    padding-top: 10px;
-    position: fixed;
-    top: 0;
-
-    li {
-      text-align: left;
-      padding-left: 20px;
-      line-height: 30px;
-      a {
-        color: #666;
-
-        &.router-link-active {
-          color: #20a0ff;
-        }
-      }
-    }
-  }
-  .container {
+    width: 100%;
     height: 100%;
-    margin-left: 210px;
-    padding-right: 20px;
-  }
+
+    .menu {
+        width: 200px;
+        padding-top: 10px;
+        position: fixed;
+        top: 0;
+
+        li {
+            text-align: left;
+            padding-left: 20px;
+            line-height: 30px;
+            a {
+                color: #666;
+
+                &.router-link-active {
+                    color: #20a0ff;
+                }
+            }
+        }
+    }
+    .container {
+        height: 100%;
+        margin-left: 210px;
+        padding-right: 20px;
+    }
 }
 </style>
